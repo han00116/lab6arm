@@ -1,0 +1,56 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "aksClusterName": {
+            "type": "string",
+            "metadata": {
+                "description": "AKS cluster name"
+            }
+            },
+            "aksLocation": {
+                "type": "string",
+                "metadata": {
+                    "description": "Location of AKS cluster"
+                }
+            },
+            "osDiskSizeGB": {
+                "type": "int",
+                "defaultValue": 0,
+                "maxValue": 1023,
+                "minValue": 0,
+                "metadata": {
+                    "description": "Disk size in GB"
+                }
+            }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [{
+        "name": "[parameters('aksClusterName')]",
+        "type": "Microsoft.ContainerService/managedClusters",
+        "apiVersion": "2023-01-01",
+        "location": "[parameters('aksLocation')]",
+        "properties": {
+            "agentPoolProfiles": [
+                {
+                    "name": "nodepool1",
+                    "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
+                    "osType": "Linux",
+                    "count": 3,
+                    "vmSize": "standard_d2s_v3"
+
+                },
+                                {
+                    "name": "nodepool2",
+                    "osDiskSizeGB": "[parameters('osDiskSizeGB')]",
+                    "osType": "Linux",
+                    "count": 2,
+                    "vmSize": "standard_d2s_v3"
+
+                }
+            ]
+        }
+    }],
+    "outputs": {}
+}

@@ -16,8 +16,8 @@
             },
             "osDiskSizeGB": {
                 "type": "int",
-                "defaultValue": 0,
-                "maxValue": 1023,
+                "defaultValue": 128,
+                "maxValue": 256,
                 "minValue": 0,
                 "metadata": {
                     "description": "Disk size in GB"
